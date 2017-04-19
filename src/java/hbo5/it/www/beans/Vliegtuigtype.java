@@ -9,7 +9,7 @@ package hbo5.it.www.beans;
  *
  * @author 11400173
  */
-class Luchtvaartmaatschappij 
+public class Vliegtuigtype 
 {
  private int id;
  private String naam;

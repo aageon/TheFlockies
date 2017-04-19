@@ -101,21 +101,6 @@ public class Persoon {
         this.paswoord = paswoord;
     }
 
-    public Bemanningslid getBemanningslid() {
-        return bemanningslid;
-    }
-
-    public void setBemanningslid(Bemanningslid bemanningslid) {
-        this.bemanningslid = bemanningslid;
-    }
-
-    public Passagier getPassagier() {
-        return passagier;
-    }
-
-    public void setPassagier(Passagier passagier) {
-        this.passagier = passagier;
-    }
     private int id;
     private String voornaaam;
     private String familienaam;
@@ -127,6 +112,4 @@ public class Persoon {
     private Date geboortedatum;
     private String login;
     private String paswoord;
-    private Bemanningslid bemanningslid;
-    private Passagier passagier;
 }

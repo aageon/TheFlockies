@@ -35,16 +35,7 @@ public class Functie {
         this.omschrijving = omschrijving;
     }
 
-    public Bemanningslid getBemanningslid() {
-        return bemanningslid;
-    }
-
-    public void setBemanningslid(Bemanningslid bemanningslid) {
-        this.bemanningslid = bemanningslid;
-    }
-
     private int id;
     private String naam;
     private String omschrijving;
-    private Bemanningslid bemanningslid;
 }

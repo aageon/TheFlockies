@@ -43,16 +43,9 @@ class Bemanningslid {
         this.functie = functie;
     }
 
-    public VluchtBemanning getVluchtBemanning() {
-        return vluchtBemanning;
-    }
-
-    public void setVluchtBemanning(VluchtBemanning vluchtBemanning) {
-        this.vluchtBemanning = vluchtBemanning;
-    }
     private int id;
     private Luchtvaartmaatschappij luchtvaartmaatschappij;
     private Persoon persoon;
     private Functie functie;
-    private VluchtBemanning vluchtBemanning;
+    
 }

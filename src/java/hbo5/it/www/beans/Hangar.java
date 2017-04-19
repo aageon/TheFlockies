@@ -27,16 +27,8 @@ public class Hangar {
         this.naam = naam;
     }
 
-    public Stockage getStockage() {
-        return stockage;
-    }
-
-    public void setStockage(Stockage stockage) {
-        this.stockage = stockage;
-    }
-
     private int id;
     private String naam;
-    private Stockage stockage;
+    
     
 }

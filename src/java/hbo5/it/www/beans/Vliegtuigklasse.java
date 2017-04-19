@@ -27,14 +27,6 @@ public class Vliegtuigklasse {
         this.naam = naam;
     }
 
-    public Passagier getPassagier() {
-        return passagier;
-    }
-
-    public void setPassagier(Passagier passagier) {
-        this.passagier = passagier;
-    }
     private int id;
     private String naam;
-    private Passagier passagier;
 }

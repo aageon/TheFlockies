@@ -9,10 +9,11 @@ package hbo5.it.www.beans;
  *
  * @author 11400173
  */
-class Luchtvaartmaatschappij 
+class Luchthaven 
 {
  private int id;
  private String naam;
+ private String stad;
 
     public int getId() {
         return id;
@@ -28,6 +29,14 @@ class Luchtvaartmaatschappij
 
     public void setNaam(String naam) {
         this.naam = naam;
+    }
+
+    public String getStad() {
+        return stad;
+    }
+
+    public void setStad(String stad) {
+        this.stad = stad;
     }
  
  
