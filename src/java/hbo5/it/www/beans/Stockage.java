@@ -11,7 +11,14 @@ import java.sql.Date;
  *
  * @author nickvandepaer
  */
-class Stockage {
+public class Stockage {
+
+    private int id;
+    private String reden;
+    private Date vandatum;
+    private Date totdatum;
+    private Vliegtuig vliegtuig;
+    private Hangar hangar;
 
     public int getId() {
         return id;
@@ -60,10 +67,17 @@ class Stockage {
     public void setHangar(Hangar hangar) {
         this.hangar = hangar;
     }
-    private int id;
-    private String reden;
-    private Date vandatum;
-    private Date totdatum;
-    private Vliegtuig vliegtuig;
-    private Hangar hangar;
+
+    public Stockage(int id, String reden, Date vandatum, Date totdatum, Vliegtuig vliegtuig, Hangar hangar) {
+        this.id = id;
+        this.reden = reden;
+        this.vandatum = vandatum;
+        this.totdatum = totdatum;
+        this.vliegtuig = vliegtuig;
+        this.hangar = hangar;
+    }
+
+    public Stockage() {
+    }
+
 }

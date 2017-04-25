@@ -12,13 +12,27 @@ import java.sql.Date;
  * @author nickvandepaer
  */
 public class Vlucht {
+
     private int id;
- private String code;
- private Date vertrektijd;
- private Date aankomsttijd;
- private Vliegtuig vliegtuig;
- private Luchthaven vertrekluchthaven;
- private Luchthaven aankomstluchthaven;
+    private String code;
+    private Date vertrektijd;
+    private Date aankomsttijd;
+    private Vliegtuig vliegtuig;
+    private Luchthaven vertrekluchthaven;
+    private Luchthaven aankomstluchthaven;
+
+    public Vlucht(int id, String code, Date vertrektijd, Date aankomsttijd, Vliegtuig vliegtuig, Luchthaven vertrekluchthaven, Luchthaven aankomstluchthaven) {
+        this.id = id;
+        this.code = code;
+        this.vertrektijd = vertrektijd;
+        this.aankomsttijd = aankomsttijd;
+        this.vliegtuig = vliegtuig;
+        this.vertrekluchthaven = vertrekluchthaven;
+        this.aankomstluchthaven = aankomstluchthaven;
+    }
+
+    public Vlucht() {
+    }
 
     public int getId() {
         return id;

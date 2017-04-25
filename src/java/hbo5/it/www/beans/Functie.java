@@ -11,6 +11,19 @@ package hbo5.it.www.beans;
  */
 public class Functie {
 
+    private int id;
+    private String naam;
+    private String omschrijving;
+
+    public Functie(int id, String naam, String omschrijving) {
+        this.id = id;
+        this.naam = naam;
+        this.omschrijving = omschrijving;
+    }
+
+    public Functie() {
+    }
+
     public int getId() {
         return id;
     }
@@ -35,7 +48,4 @@ public class Functie {
         this.omschrijving = omschrijving;
     }
 
-    private int id;
-    private String naam;
-    private String omschrijving;
 }

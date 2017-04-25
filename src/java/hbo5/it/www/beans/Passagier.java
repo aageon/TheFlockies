@@ -9,7 +9,15 @@ package hbo5.it.www.beans;
  *
  * @author nickvandepaer
  */
-class Passagier {
+public class Passagier {
+
+    private int id;
+    private int ingeschreven;
+    private int ingecheckt;
+    private Vliegtuigklasse vliegtuigklasse;
+    private String plaats;
+    private Vlucht vlucht;
+    private Persoon persoon;
 
     public int getId() {
         return id;
@@ -66,11 +74,18 @@ class Passagier {
     public void setPersoon(Persoon persoon) {
         this.persoon = persoon;
     }
-    private int id;
-    private int ingeschreven;
-    private int ingecheckt;
-    private Vliegtuigklasse vliegtuigklasse;
-    private String plaats;
-    private Vlucht vlucht;
-    private Persoon persoon;
+
+    public Passagier(int id, int ingeschreven, int ingecheckt, Vliegtuigklasse vliegtuigklasse, String plaats, Vlucht vlucht, Persoon persoon) {
+        this.id = id;
+        this.ingeschreven = ingeschreven;
+        this.ingecheckt = ingecheckt;
+        this.vliegtuigklasse = vliegtuigklasse;
+        this.plaats = plaats;
+        this.vlucht = vlucht;
+        this.persoon = persoon;
+    }
+
+    public Passagier() {
+    }
+
 }
