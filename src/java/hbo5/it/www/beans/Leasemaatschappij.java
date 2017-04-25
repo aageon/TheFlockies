@@ -9,10 +9,18 @@ package hbo5.it.www.beans;
  *
  * @author 11400173
  */
-class Leasemaatschappij 
-{
- private int id;
- private String naam;
+public class Leasemaatschappij {
+
+    private int id;
+    private String naam;
+
+    public Leasemaatschappij(int id, String naam) {
+        this.id = id;
+        this.naam = naam;
+    }
+
+    public Leasemaatschappij() {
+    }
 
     public int getId() {
         return id;
@@ -29,8 +37,5 @@ class Leasemaatschappij
     public void setNaam(String naam) {
         this.naam = naam;
     }
- 
- 
- 
- 
+
 }

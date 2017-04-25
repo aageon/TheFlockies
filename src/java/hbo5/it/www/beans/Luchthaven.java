@@ -9,11 +9,20 @@ package hbo5.it.www.beans;
  *
  * @author 11400173
  */
-class Luchthaven 
-{
- private int id;
- private String naam;
- private String stad;
+public class Luchthaven {
+
+    private int id;
+    private String naam;
+    private String stad;
+
+    public Luchthaven(int id, String naam, String stad) {
+        this.id = id;
+        this.naam = naam;
+        this.stad = stad;
+    }
+
+    public Luchthaven() {
+    }
 
     public int getId() {
         return id;
@@ -38,6 +47,5 @@ class Luchthaven
     public void setStad(String stad) {
         this.stad = stad;
     }
- 
- 
+
 }

@@ -13,6 +13,18 @@ import java.sql.Date;
  */
 public class Persoon {
 
+    private int id;
+    private String voornaaam;
+    private String familienaam;
+    private String straat;
+    private String huisnr;
+    private String postcode;
+    private String woonplaats;
+    private String land;
+    private Date geboortedatum;
+    private String login;
+    private String paswoord;
+
     public int getId() {
         return id;
     }
@@ -101,15 +113,21 @@ public class Persoon {
         this.paswoord = paswoord;
     }
 
-    private int id;
-    private String voornaaam;
-    private String familienaam;
-    private String straat;
-    private String huisnr;
-    private String postcode;
-    private String woonplaats;
-    private String land;
-    private Date geboortedatum;
-    private String login;
-    private String paswoord;
+    public Persoon(int id, String voornaaam, String familienaam, String straat, String huisnr, String postcode, String woonplaats, String land, Date geboortedatum, String login, String paswoord) {
+        this.id = id;
+        this.voornaaam = voornaaam;
+        this.familienaam = familienaam;
+        this.straat = straat;
+        this.huisnr = huisnr;
+        this.postcode = postcode;
+        this.woonplaats = woonplaats;
+        this.land = land;
+        this.geboortedatum = geboortedatum;
+        this.login = login;
+        this.paswoord = paswoord;
+    }
+
+    public Persoon() {
+    }
+
 }

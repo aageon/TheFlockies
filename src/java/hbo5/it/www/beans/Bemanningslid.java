@@ -9,8 +9,12 @@ package hbo5.it.www.beans;
  *
  * @author nickvandepaer
  */
-class Bemanningslid {
-
+public class Bemanningslid {
+    private int id;
+    private Luchtvaartmaatschappij luchtvaartmaatschappij;
+    private Persoon persoon;
+    private Functie functie;
+    
     public int getId() {
         return id;
     }
@@ -43,9 +47,16 @@ class Bemanningslid {
         this.functie = functie;
     }
 
-    private int id;
-    private Luchtvaartmaatschappij luchtvaartmaatschappij;
-    private Persoon persoon;
-    private Functie functie;
+    public Bemanningslid(int id, Luchtvaartmaatschappij luchtvaartmaatschappij, Persoon persoon, Functie functie) {
+        this.id = id;
+        this.luchtvaartmaatschappij = luchtvaartmaatschappij;
+        this.persoon = persoon;
+        this.functie = functie;
+    }
+
+    public Bemanningslid() {
+    }
+
+
     
 }

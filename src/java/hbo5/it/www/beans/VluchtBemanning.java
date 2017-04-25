@@ -10,10 +10,21 @@ package hbo5.it.www.beans;
  * @author nickvandepaer
  */
 public class VluchtBemanning {
+
     private int id;
     private String taak;
     private Bemanningslid bemanningslid;
     private Vlucht vlucht;
+
+    public VluchtBemanning(int id, String taak, Bemanningslid bemanningslid, Vlucht vlucht) {
+        this.id = id;
+        this.taak = taak;
+        this.bemanningslid = bemanningslid;
+        this.vlucht = vlucht;
+    }
+
+    public VluchtBemanning() {
+    }
 
     public int getId() {
         return id;
