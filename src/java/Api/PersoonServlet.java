@@ -10,8 +10,12 @@ import hbo5.it.www.beans.Persoon;
 import hbo5.it.www.dataaccess.DAPersoon;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,6 +72,28 @@ public class PersoonServlet extends HttpServlet {
         }
     }
 
+    private  Persoon parseRequest(HttpServletRequest request){
+        Persoon p = new Persoon();
+        p.setId(request.getParameter("id") == null ? 0: Integer.parseInt(request.getParameter("id")));
+        
+        p.setFamilienaam(request.getParameter("familienaam"));
+        p.setVoornaaam(request.getParameter("voornaam"));
+        p.setStraat(request.getParameter("straat"));
+        p.setHuisnr(request.getParameter("huisnr"));
+        p.setPostcode(request.getParameter("postcode"));
+        p.setWoonplaats(request.getParameter("woonplaats"));
+        p.setLand(request.getParameter("land"));
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+        java.util.Date parsed = format.parse(request.getParameter("geboortedatum"));
+        java.sql.Date sql = new java.sql.Date(parsed.getTime());
+        }
+        catch(Exception e){}
+        p.setLogin(request.getParameter("login"));
+        p.setPaswoord(request.getParameter("paswoord"));
+        return p;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

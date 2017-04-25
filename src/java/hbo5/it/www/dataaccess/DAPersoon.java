@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +72,33 @@ public class DAPersoon {
         }
         return persoons;
     }
+    
+    public void doUpdate(Persoon p){
+        PreparedStatement stmt = null;
+        try {
+            String sql = "Update persoon SET voornaam = ?, " + "familienaam = ?, " + "straat = ?, " + "huisnr = ?, " +
+                    "postcode = ?, " + "woonplaats = ?, " + "land = ?, " + "geboortedatum = ?, " + "login = ?, " + "paswoord = ?";
+            
+            stmt = conn.prepareStatement(sql);
+            
+            stmt.setString(1, p.getVoornaaam());
+            stmt.setString(2, p.getFamilienaam());
+            stmt.setString(3, p.getStraat());
+            stmt.setString(4, p.getHuisnr());
+            stmt.setString(5, p.getPostcode());
+            stmt.setString(6, p.getWoonplaats());
+            stmt.setString(7, p.getLand());
+            DateFormat df = new SimpleDateFormat("dd/MM/YYYY");
+            stmt.setString(8, df.format(p.getGeboortedatum()));
+            stmt.setString(9, p.getLogin());
+            stmt.setString(10, p.getPaswoord());
+            
+        } catch (Exception e) {
+        }
+    }
+    
+    
+    
     
         public void close() throws SQLException {
         if (conn != null) {
