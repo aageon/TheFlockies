@@ -20,21 +20,24 @@ import java.util.List;
  */
 public class DAPersoon {
     private Connection conn = null;
-    public  DAPersoon(String path){
+    public  DAPersoon(String url, String login, String password, String driver)throws ClassNotFoundException, SQLException{
         try {
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:" + path);
+            Class.forName(driver);
+            conn = DriverManager.getConnection(url, login, password);
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
     
+   
+    
+    
     public List<Persoon> ListPersonen(){
-        List<Persoon> persoons = new ArrayList<Persoon>();
+        List<Persoon> persoons = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            String sql = "Select * from Persoon";
+            String sql = "SELECT * FROM PERSOON";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
@@ -57,13 +60,21 @@ public class DAPersoon {
         } catch (Exception e) {
         }
         finally{
-            rs.close();
-            stmt.close();
+            try {
+                stmt.close();
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+            }
         }
         return persoons;
     }
     
-    
+        public void close() throws SQLException {
+        if (conn != null) {
+            conn.close();
+        }  
+    }
     
 }
-
