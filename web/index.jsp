@@ -16,6 +16,17 @@ and open the template in the editor.
     </head>
     <body>
         <div>TODO write content</div>
+        <form method="post" action="api/persoonservlet?delete">
+            <input type="text" name="id"/>
+        <input type="text" name="txt1"/>
+        <input type="text" name="txt2"/>
+
+
+
+
+        <input type="text" name="datum"/>
+        <input type="submit" value="submit"/>
+        </form>
         
     </body>
 </html>

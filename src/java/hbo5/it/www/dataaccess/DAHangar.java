@@ -7,6 +7,7 @@ package hbo5.it.www.dataaccess;
 
 import hbo5.it.www.beans.Bemanningslid;
 import hbo5.it.www.beans.Functie;
+import hbo5.it.www.beans.Hangar;
 import hbo5.it.www.beans.Luchtvaartmaatschappij;
 import hbo5.it.www.beans.Persoon;
 import java.sql.Connection;
@@ -21,11 +22,11 @@ import java.util.List;
  *
  * @author nickvandepaer
  */
-public class DAFunctie {
+public class DAHangar {
     
     private Connection conn = null;
     
-    public DAFunctie(String url, String login, String password, String driver) throws ClassNotFoundException, SQLException {
+    public DAHangar(String url, String login, String password, String driver) throws ClassNotFoundException, SQLException {
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, login, password);
@@ -34,22 +35,21 @@ public class DAFunctie {
         }
     }
     
-    public List<Functie> listFuncties() {
-        List<Functie> functies = new ArrayList<>();
+    public List<Hangar> listHangar() {
+        List<Hangar> hangars = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT * from FUNCTIE";
+            String sql = "SELECT * from hangar";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
             
             while (rs.next()) {
-                Functie f = new Functie();
-                f.setId(rs.getInt("id"));
-                f.setNaam(rs.getString("naam"));
-                f.setOmschrijving(rs.getString("omschrijving"));
+                Hangar h = new Hangar();
+                h.setId(rs.getInt("id"));
+                h.setNaam(rs.getString("naam"));
                 
-                functies.add(f);
+                hangars.add(h);
             }
         } catch (Exception e) {
         } finally {
@@ -61,7 +61,7 @@ public class DAFunctie {
             } catch (Exception e) {
             }
         }
-        return functies;
+        return hangars;
     }
     
     public void close() throws SQLException {

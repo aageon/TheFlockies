@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,8 +22,10 @@ import java.util.List;
  * @author nickvandepaer
  */
 public class DAPersoon {
+
     private Connection conn = null;
-    public  DAPersoon(String url, String login, String password, String driver)throws ClassNotFoundException, SQLException{
+
+    public DAPersoon(String url, String login, String password, String driver) throws ClassNotFoundException, SQLException {
         try {
             Class.forName(driver);
             conn = DriverManager.getConnection(url, login, password);
@@ -30,11 +33,8 @@ public class DAPersoon {
             e.printStackTrace();
         }
     }
-    
-   
-    
-    
-    public List<Persoon> ListPersonen(){
+
+    public List<Persoon> ListPersonen() {
         List<Persoon> persoons = new ArrayList<>();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -42,8 +42,8 @@ public class DAPersoon {
             String sql = "SELECT * FROM PERSOON";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
-            
-            while (rs.next()) {                
+
+            while (rs.next()) {
                 Persoon p = new Persoon();
                 p.setFamilienaam(rs.getString("familienaam"));
                 p.setVoornaaam(rs.getString("voornaam"));
@@ -56,12 +56,11 @@ public class DAPersoon {
                 p.setGeboortedatum(rs.getDate("geboortedatum"));
                 p.setLogin(rs.getString("login"));
                 p.setPaswoord(rs.getString("paswoord"));
-                
+
                 persoons.add(p);
             }
         } catch (Exception e) {
-        }
-        finally{
+        } finally {
             try {
                 stmt.close();
                 if (rs != null) {
@@ -72,15 +71,15 @@ public class DAPersoon {
         }
         return persoons;
     }
-    
-    public void doUpdate(Persoon p){
+
+    public void doUpdate(Persoon p) {
         PreparedStatement stmt = null;
         try {
-            String sql = "Update persoon SET voornaam = ?, " + "familienaam = ?, " + "straat = ?, " + "huisnr = ?, " +
-                    "postcode = ?, " + "woonplaats = ?, " + "land = ?, " + "geboortedatum = ?, " + "login = ?, " + "paswoord = ?";
-            
+            String sql = "Update persoon SET voornaam = ?, " + "familienaam = ?, " + "straat = ?, " + "huisnr = ?, "
+                    + "postcode = ?, " + "woonplaats = ?, " + "land = ?, " + "geboortedatum = ?, " + "login = ?, " + "paswoord = ?";
+
             stmt = conn.prepareStatement(sql);
-            
+
             stmt.setString(1, p.getVoornaaam());
             stmt.setString(2, p.getFamilienaam());
             stmt.setString(3, p.getStraat());
@@ -92,18 +91,84 @@ public class DAPersoon {
             stmt.setString(8, df.format(p.getGeboortedatum()));
             stmt.setString(9, p.getLogin());
             stmt.setString(10, p.getPaswoord());
-            
+
+            stmt.executeUpdate();
         } catch (Exception e) {
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
         }
     }
+
+    public void doDelete(Persoon p) throws SQLException {
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = conn.prepareStatement("DELETE FROM Persoon WHERE id = ?");
+
+            stmt.setInt(1, p.getId());
+
+            stmt.executeUpdate();
+        } catch (Exception e) {
+        } finally {
+            try {
+                stmt.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    public int doCreate(Persoon p) throws SQLException {
+        int id = 0;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            //Autonummering id ??????
+            
+            String sql = "INSERT INTO Persoon (id, voornaam, familienaam, straat, huisnr, postcode, woonplaats, land, geboortedatum, login, paswoord) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            stmt = conn.prepareStatement(sql);
+
+            stmt.setInt(1, p.getId());
+            stmt.setString(2, p.getVoornaaam());
+            stmt.setString(3, p.getFamilienaam());
+            stmt.setString(4, p.getStraat());
+            stmt.setString(5, p.getHuisnr());
+            stmt.setString(6, p.getPostcode());
+            stmt.setString(7, p.getWoonplaats());
+            stmt.setString(8, p.getLand());
+            stmt.setDate(9, p.getGeboortedatum());
+            stmt.setString(10, p.getLogin());
+            stmt.setString(11, p.getPaswoord());
+
+            int rows = stmt.executeUpdate();
+
+            if (rows == 0) {
+                throw new SQLException("Unable to create persoon");
+            }
+
+        } catch (Exception e) {
+        } finally {
+            try {
+                stmt.close();
+                if (rs != null) {
+                    rs.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return id;
+    }
+
     
     
-    
-    
-        public void close() throws SQLException {
+    public void close() throws SQLException {
         if (conn != null) {
             conn.close();
-        }  
+        }
     }
-    
+
 }

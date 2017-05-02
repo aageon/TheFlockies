@@ -39,9 +39,9 @@ public class PersoonServlet extends HttpServlet {
 //        response.setContentType("text/html;charset=UTF-8");
 //        
 //    }
-    
-    private DAPersoon dapersoon = null;
 
+    private DAPersoon dapersoon = null;
+    
     @Override
     public void init() throws ServletException {
         try {
@@ -56,11 +56,7 @@ public class PersoonServlet extends HttpServlet {
             throw new ServletException(e);
         }
     }
-
-
-
-
-
+    
     @Override
     public void destroy() {
         try {
@@ -71,10 +67,10 @@ public class PersoonServlet extends HttpServlet {
             
         }
     }
-
-    private  Persoon parseRequest(HttpServletRequest request){
+    
+    private Persoon parseRequest(HttpServletRequest request) {
         Persoon p = new Persoon();
-        p.setId(request.getParameter("id") == null ? 0: Integer.parseInt(request.getParameter("id")));
+        p.setId(request.getParameter("id") == null ? 0 : Integer.parseInt(request.getParameter("id")));
         
         p.setFamilienaam(request.getParameter("familienaam"));
         p.setVoornaaam(request.getParameter("voornaam"));
@@ -85,15 +81,15 @@ public class PersoonServlet extends HttpServlet {
         p.setLand(request.getParameter("land"));
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         try {
-        java.util.Date parsed = format.parse(request.getParameter("geboortedatum"));
-        java.sql.Date sql = new java.sql.Date(parsed.getTime());
+            java.util.Date parsed = format.parse(request.getParameter("geboortedatum"));
+            java.sql.Date sql = new java.sql.Date(parsed.getTime());
+        } catch (Exception e) {
         }
-        catch(Exception e){}
         p.setLogin(request.getParameter("login"));
         p.setPaswoord(request.getParameter("paswoord"));
         return p;
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -109,7 +105,7 @@ public class PersoonServlet extends HttpServlet {
         try {
             List<Persoon> personen = dapersoon.ListPersonen();
             
-            Gson gson = new Gson(); 
+            Gson gson = new Gson();
             
             response.setContentType("application/json");
             
@@ -131,6 +127,56 @@ public class PersoonServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            Persoon p = parseRequest(request);
+            
+//            //Autonummering id
+//            p.setFamilienaam(request.getParameter("txt1"));
+//            p.setVoornaaam(request.getParameter("txt2"));
+//            p.setStraat("LAngebaan");
+//            p.setHuisnr("16");
+//            p.setPostcode("2568");
+//            p.setWoonplaats("Shakaa");
+//            p.setLand("Belgie");
+//            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+//            try {
+////                java.util.Date parsed = format.parse("05/05/1988");
+//                    java.util.Date parsed = format.parse(request.getParameter("datum"));
+//                java.sql.Date sql = new java.sql.Date(parsed.getTime());
+//                p.setGeboortedatum(sql);
+//            } catch (Exception e) {
+//                System.out.println("fout");
+//            }
+//            
+//            p.setLogin("test");
+//            p.setPaswoord("test");
+
+            p.setId(Integer.parseInt(request.getParameter("id")));
+                    
+            Gson gson = new Gson();
+            
+            String type = request.getQueryString();
+            
+            switch (type) {
+                case "update": {
+                    dapersoon.doUpdate(p);
+                    break;
+                }
+                case "delete": {
+                    dapersoon.doDelete(p);
+                    break;
+                }
+                case "create": {
+                    p.setId(dapersoon.doCreate(p));
+                    response.getWriter().write(gson.toJson(p));
+                    
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            //fout?
+        }
+        
         
     }
 
